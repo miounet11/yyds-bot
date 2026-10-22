@@ -1,0 +1,14 @@
+---
+description: Build and ship a site with yyds run. Do not prompt the user.
+alwaysApply: true
+---
+
+# yyds-bot
+
+Do not prompt a person for copy, theme, languages, or credentials.
+
+Run `yyds run --brief brief.yaml` (in this repo: `node dist/cli.js run --brief examples/minimal.yaml --fresh` after `npm run build`).
+
+A brief needs only `industry` and `domain`. The command expands presets, builds a static site, self-checks SEO/GEO, UI, and AI pillars, and retries until each score is 100.
+
+Done means exit code 0 and `audit EXIT=0` in the output. On failure, read `.yyds/<project>/reports/audit.json` and run the command again after fixing the repo or the complete brief. Never invent API keys. Never commit `.env`.
