@@ -1,0 +1,22 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: node dist/cli.js run --brief examples/minimal.yaml --fresh
+      - run: node dist/cli.js audit --brief examples/minimal.yaml
+      - run: bash -n .yyds/harbor-kiln/infra/bootstrap.sh

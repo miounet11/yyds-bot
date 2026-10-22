@@ -1,0 +1,39 @@
+{
+  "name": "yyds-bot",
+  "version": "0.1.0",
+  "description": "Brief-driven static site factory for pages that people, search engines, and AI answer engines can trust.",
+  "type": "module",
+  "bin": {
+    "yyds": "./dist/cli.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "examples",
+    "docs",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "INSTRUCTIONS.md",
+    "README.md",
+    "README.zh.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "example": "npm run build && node dist/cli.js run --brief examples/minimal.yaml --fresh && node dist/cli.js audit --brief examples/minimal.yaml"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
+}
