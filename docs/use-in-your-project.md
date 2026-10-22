@@ -10,8 +10,8 @@ You are building a production website with the yyds-bot repository. Do not ask m
 
 | Method | Command |
 | --- | --- |
-| npm from GitHub | `npm install github:miounet11/yyds-bot` then `npx yyds run --brief brief.yaml` |
-| Submodule | `git submodule add https://github.com/miounet11/yyds-bot vendor/yyds-bot` then `node vendor/yyds-bot/dist/cli.js run --brief brief.yaml --fresh` after `npm install` and `npm run build` in the submodule |
+| npm from GitHub | `npm install github:miounet11/yyds-bot` then `npx yyds run --brief brief.yaml`. `prepare` compiles `dist/`. |
+| Submodule | `git submodule add https://github.com/miounet11/yyds-bot vendor/yyds-bot`, then `npm install --prefix vendor/yyds-bot`, then `node vendor/yyds-bot/dist/cli.js run --brief brief.yaml --fresh` |
 | Clone | Same commands as the submodule, from the clone root |
 
 ## Minimal brief

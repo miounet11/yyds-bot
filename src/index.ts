@@ -1,3 +1,4 @@
+export { readPackageVersion } from "./version.js";
 export { runPipeline, runAutopilot, rollbackTo } from "./pipeline/run.js";
 export { scoreSite, formatScorecard } from "./pillars/scorecard.js";
 export { materialize } from "./presets/materialize.js";

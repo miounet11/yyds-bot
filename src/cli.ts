@@ -8,6 +8,7 @@ import { rollbackTo, runAutopilot, runPipeline } from "./pipeline/run.js";
 import { STAGES, type StageName } from "./pillars/thresholds.js";
 import { formatScorecard, scoreSite } from "./pillars/scorecard.js";
 import { hostSlug } from "./util.js";
+import { readPackageVersion } from "./version.js";
 
 function repoRoot(): string {
   let dir = path.dirname(fileURLToPath(import.meta.url));
@@ -24,13 +25,17 @@ function repoRoot(): string {
 }
 
 function usage(): string {
-  return `yyds run --brief brief.yaml [--fresh] [--cwd dir]
+  return `yyds ${readPackageVersion()}
+yyds run --brief brief.yaml [--fresh] [--until <stage>] [--cwd dir]
 yyds autopilot --brief brief.yaml [--cwd dir]
 yyds audit --brief brief.yaml [--cwd dir]
 yyds rollback --brief brief.yaml --stage <${STAGES.join("|")}> [--cwd dir]
+yyds --version
 
+Stages: ${STAGES.join(", ")}.
 Do not prompt a person. A brief may contain only industry and domain.
-Definition of done: yyds run exits 0 and every pillar score meets its threshold.`;
+Definition of done: yyds run (all stages) exits 0 and every pillar score meets its threshold.
+--until stops early for debugging and is not the definition of done.`;
 }
 
 function arg(name: string, argv: string[]): string | undefined {
@@ -40,6 +45,10 @@ function arg(name: string, argv: string[]): string | undefined {
 
 async function main(): Promise<void> {
   const argv = process.argv.slice(2);
+  if (argv.includes("--version") || argv.includes("-v")) {
+    process.stdout.write(`${readPackageVersion()}\n`);
+    return;
+  }
   const command = argv[0];
   const briefPath = arg("--brief", argv);
   const cwd = path.resolve(arg("--cwd", argv) ?? process.cwd());

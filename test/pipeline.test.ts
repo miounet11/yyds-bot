@@ -9,6 +9,7 @@ import { THEME_PRESETS } from "../src/design/themes.js";
 import { runAutopilot, runPipeline, rollbackTo } from "../src/pipeline/run.js";
 import { publishRelease, rollbackRelease } from "../src/pipeline/publish.js";
 import { tryLlmEnrich } from "../src/llm/client.js";
+import { readPackageVersion } from "../src/version.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dirs: string[] = [];
@@ -87,6 +88,10 @@ describe("zero-human pipeline", () => {
 });
 
 describe("gates and design", () => {
+  it("reports package version 1.0.0", () => {
+    expect(readPackageVersion()).toBe("1.0.0");
+  });
+
   it("flags duplicate prose and accepts distinct prose", () => {
     const same = shingles(contentTokens("alpha beta gamma delta epsilon zeta"));
     expect(jaccard(same, same)).toBe(1);

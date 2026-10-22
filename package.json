@@ -1,6 +1,6 @@
 {
   "name": "yyds-bot",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Brief-driven static site factory for pages that people, search engines, and AI answer engines can trust.",
   "type": "module",
   "bin": {
@@ -16,10 +16,12 @@
     "AGENTS.md",
     "CLAUDE.md",
     "INSTRUCTIONS.md",
+    "CHANGELOG.md",
     "README.md",
     "README.zh.md"
   ],
   "scripts": {
+    "prepare": "tsc -p tsconfig.json",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
